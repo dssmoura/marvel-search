@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Fox Banner</title>
+    <!-- Adicione o link para o CSS do Tailwind CSS aqui -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-gray-200 p-4">
+        <div id="fox-banner" class="w-full h-40 bg-cover bg-center"></div>
+    </div>
+
+    <script>
+        // Função para fazer a requisição à API e atualizar a imagem
+        async function fetchRandomFox() {
+            try {
+                const response = await fetch('https://randomfox.ca/floof/');
+                const data = await response.json();
+                const imageUrl = data.image;
+
+                // Atualiza a imagem de fundo do banner
+                document.getElementById('fox-banner').style.backgroundImage = `url(${imageUrl})`;
+            } catch (error) {
+                console.error('Erro ao buscar a imagem da API:', error);
+            }
+        }
+
+        // Função para buscar uma nova imagem a cada 3 segundos
+        setInterval(fetchRandomFox, 3000);
+
+        // Chama a função uma vez para carregar a primeira imagem
+        fetchRandomFox();
+    </script>
+</body>
+</html>
